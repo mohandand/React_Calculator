@@ -8,6 +8,7 @@ export default function Calculator() {
   const ops = ['/', '*', '+', '-', '.'];
 
   function updateCalc(value) {
+    //Prevent adding symbols first or adding multiple symbols at a time or adding symbols at end
     if (
       (ops.includes(value) && calc == '') ||
       (ops.includes(value) && ops.includes(calc.slice(-1)))
@@ -15,8 +16,23 @@ export default function Calculator() {
       return;
     }
     setCalc(calc + value);
-  }
 
+    if (!ops.includes(value)) {
+      console.log(value);
+      setResult(eval(calc + value).toString());
+    }
+  }
+  function calculate() {
+    setCalc(eval(calc).toString());
+  }
+  function deleteLast() {
+    if (calc === '') {
+      return;
+    } else {
+      const value = calc.slice(0, -1);
+      setCalc(value);
+    }
+  }
   function createDigits() {
     let digits = [];
     for (let i = 1; i < 10; i++) {
@@ -38,7 +54,7 @@ export default function Calculator() {
     <div className="App">
       <div className="container">
         <div className="display">
-          {result ? <span>(0)</span> : ''}
+          {result ? <span>{result}</span> : ''}
           {calc || 0}
         </div>
         <div className="operators">
@@ -71,7 +87,7 @@ export default function Calculator() {
             -
           </button>
 
-          <button>DEL</button>
+          <button onClick={deleteLast}>DEL</button>
         </div>
         <div className="digits">
           {createDigits()}
@@ -89,13 +105,7 @@ export default function Calculator() {
           >
             .
           </button>
-          <button
-            onClick={() => {
-              updateCalc('=');
-            }}
-          >
-            =
-          </button>
+          <button onClick={calculate}>=</button>
         </div>
       </div>
     </div>

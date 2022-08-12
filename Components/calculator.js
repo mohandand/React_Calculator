@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 import './calculator.css';
 
 export default function Calculator() {
+  function createDigits() {
+    let digits = [];
+    for (let i = 1; i < 10; i++) {
+      digits.push(<button key={i}>{i}</button>);
+    }
+    return digits;
+  }
+
   return (
     <div className="container">
       <div className="display">
-        <span>0</span>
+        <span>0</span>0
       </div>
       <div className="operators">
         <button>/</button>
@@ -16,6 +24,7 @@ export default function Calculator() {
         <button>DEL</button>
       </div>
       <div className="digits">
+        {createDigits()}
         <button>0</button>
         <button>.</button>
         <button>=</button>

@@ -4,7 +4,7 @@ import './calculator.css';
 export default function Calculator() {
   const [calc, setCalc] = useState('');
   const [result, setResult] = useState('');
-
+//
   const ops = ['/', '*', '+', '-', '.'];
 
   function updateCalc(value) {
